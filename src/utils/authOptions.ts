@@ -24,11 +24,11 @@ export const authOptions: AuthOptions = {
                 password: { label: "Password", type: "password" }
             },
             async authorize(credentials, req) {
-                const user: User = await prisma.users.findUnique({
+                const user = await prisma.users.findUnique({
                     where: {
                         email: credentials?.username
                     }
-                })
+                }) as unknown as User
                 if (user) {
                     return user;
                 }
